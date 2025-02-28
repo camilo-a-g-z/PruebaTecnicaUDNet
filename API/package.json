@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Prueba tecnica realizada para la convocatoria de pasantias en la UDNet",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +26,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "pg": "^8.13.3",
     "zod": "^3.24.2"
   }
 }
