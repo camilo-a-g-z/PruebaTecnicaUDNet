@@ -196,6 +196,6 @@ Content-Type: application/json
 
 ## Imagenes de referencia
 ### Pagina web funcionando
-![PaginaWeb](imgs\web.png)
+![PaginaWeb](imgs/web.png)
 ### Endpoint funcionando
-![EndPoint](imgs\endpoint.png)
+![EndPoint](imgs/endpoint.png)
