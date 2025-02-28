@@ -51,7 +51,7 @@ Pasos a seguir para ejecutar el proyecto, con tecnologías implementadas: **Node
 Ejecuta el siguiente comando en la terminal:
 ```sh
 git clone https://github.com/camilo-a-g-z/PruebaTecnicaUDNet
-cd repositorio
+cd PruebaTecnicaUDNet/API
 ```
 
 ### 2️⃣ Iniciar un proyecto NPM
