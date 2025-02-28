@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API - Datos en Tablas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 900px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      /* Estilos para las pestañas */
+      .tabs {
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 2px solid #007bff;
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #007bff;
+        border-bottom: 3px solid transparent;
+      }
+
+      .tab.active {
+        border-bottom: 3px solid #007bff;
+      }
+
+      /* Estilos para las tablas */
+      .table-container {
+        display: none;
+      }
+
+      .table-container.active {
+        display: block;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Datos de la API</h2>
+
+      <!-- Pestañas -->
+      <div class="tabs">
+        <div class="tab active" data-target="persona">Personas</div>
+        <div class="tab" data-target="paciente">Pacientes</div>
+        <div class="tab" data-target="doctor">Doctores</div>
+        <div class="tab" data-target="consultorio">Consultorios</div>
+        <div class="tab" data-target="cita">Citas</div>
+      </div>
+
+      <!-- Tablas -->
+      <div id="persona" class="table-container active">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Documento</th>
+            </tr>
+          </thead>
+          <tbody id="table-persona"></tbody>
+        </table>
+      </div>
+
+      <div id="paciente" class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>ID Persona</th>
+              <th>Patología</th>
+            </tr>
+          </thead>
+          <tbody id="table-paciente"></tbody>
+        </table>
+      </div>
+
+      <div id="doctor" class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>ID Persona</th>
+              <th>Especialidad</th>
+            </tr>
+          </thead>
+          <tbody id="table-doctor"></tbody>
+        </table>
+      </div>
+
+      <div id="consultorio" class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Piso</th>
+            </tr>
+          </thead>
+          <tbody id="table-consultorio"></tbody>
+        </table>
+      </div>
+
+      <div id="cita" class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>ID Doctor</th>
+              <th>ID Paciente</th>
+              <th>ID Consultorio</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+            </tr>
+          </thead>
+          <tbody id="table-cita"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="module">
+      // Función para obtener datos y llenar la tabla
+      function fetchData(endpoint, tableId, formatRow) {
+        fetch(`http://localhost:3000/${endpoint}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const tableBody = document.getElementById(`table-${tableId}`);
+            tableBody.innerHTML = data.map(formatRow).join("");
+          })
+          .catch((error) => {
+            console.error(`Error al obtener datos de ${endpoint}:`, error);
+          });
+      }
+
+      // Formato de las filas de cada tabla
+      const rowFormatters = {
+        persona: (p) => `<tr><td>${p.idpersona}</td><td>${p.nombrepersona}</td><td>${p.apellidopersona}</td><td>${p.numdocumento}</td></tr>`,
+        paciente: (p) => `<tr><td>${p.idpaciente}</td><td>${p.idpersona}</td><td>${p.patologia || "N/A"}</td></tr>`,
+        doctor: (d) => `<tr><td>${d.iddoctor}</td><td>${d.idpersona}</td><td>${d.especialidad || "N/A"}</td></tr>`,
+        consultorio: (c) => `<tr><td>${c.idconsultorio}</td><td>${c.nombreconsultorio}</td><td>${c.piso}</td></tr>`,
+        cita: (c) => `<tr><td>${c.idcita}</td><td>${c.iddoctor}</td><td>${c.idpaciente}</td><td>${c.idconsultorio}</td><td>${c.dia}/${c.mes}/${c.anio}</td><td>${c.hora}</td></tr>`,
+      };
+
+      // Cargar datos de todas las tablas
+      Object.keys(rowFormatters).forEach((key) => fetchData(key, key, rowFormatters[key]));
+
+      // Función para cambiar entre pestañas
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+          document.querySelectorAll(".table-container").forEach((table) => table.classList.remove("active"));
+
+          tab.classList.add("active");
+          document.getElementById(tab.dataset.target).classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>

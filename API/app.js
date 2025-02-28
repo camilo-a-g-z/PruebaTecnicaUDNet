@@ -8,8 +8,8 @@ import { PersonaRouter } from './routes/persona.js';
 
 
 const app = express();
-app.use(corsMiddleware());
 app.use(express.json());
+app.use(corsMiddleware());
 app.disable('x-powered-by');
 
 

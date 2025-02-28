@@ -1,13 +1,17 @@
 import cors from "cors";
+
 const ACCEPTED_ORIGINS = ["http://localhost:8080", "http://localhost:3000"];
-export const corsMiddleware = ({ aceptedOrigins = ACCEPTED_ORIGINS } = {}) =>
+
+export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) =>
   cors({
     origin: (origin, callback) => {
-      if (ACCEPTED_ORIGINS.includes(origin) || !origin) {
+      if (acceptedOrigins.includes(origin)) {
         return callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
       }
-      return callback(new Error("Not allowed by CORS"));
+      if (!origin) {
+        return callback(null, true);
+      }
+      //para que no se rechace la peticion desde un html simple (en produccion se debe cambiar)
+      return callback(null, true);
     },
   });
