@@ -1,0 +1,25 @@
+{
+  "name": "pruebatecnicaudnet",
+  "version": "1.0.0",
+  "description": "Prueba tecnica realizada para la convocatoria de pasantias en la UDNet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camilo-a-g-z/PruebaTecnicaUDNet.git"
+  },
+  "keywords": [
+    "express",
+    "cita",
+    "medica",
+    "postgres"
+  ],
+  "author": "Camilo Andres Garcia Zambrano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/camilo-a-g-z/PruebaTecnicaUDNet/issues"
+  },
+  "homepage": "https://github.com/camilo-a-g-z/PruebaTecnicaUDNet#readme"
+}
