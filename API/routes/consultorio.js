@@ -7,6 +7,6 @@ ConsultorioRouter.get('/', ConsultorioController.getAll);
 
 ConsultorioRouter.post('/', ConsultorioController.create);
 
-ConsultorioRouter.put('/', ConsultorioController.update);
+ConsultorioRouter.patch('/:id', ConsultorioController.update);
 
 ConsultorioRouter.delete('/:idconsultorio', ConsultorioController.delete);

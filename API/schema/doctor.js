@@ -1,14 +1,5 @@
 import z from "zod";
 
-/*
-create table DOCTOR (
-   IDDOCTOR             INT4                 not null,
-   IDPERSONA            INT4                 not null,
-   ESPECIALIDAD         VARCHAR(30)          null,
-   constraint PK_DOCTOR primary key (IDDOCTOR)
-);
-*/
-
 const Doctor = z.object({
   iddoctor: z.number(),
   idpersona: z.number(),
@@ -17,6 +8,10 @@ const Doctor = z.object({
 
 export function validateDoctor(object) {
   return Doctor.parse(object);
+}
+
+export function validateDoctorUpdate(object) {
+  return Doctor.partial().parse(object);
 }
 
 export default Doctor;

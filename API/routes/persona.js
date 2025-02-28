@@ -7,6 +7,6 @@ PersonaRouter.get('/', PersonaController.getAll);
 
 PersonaRouter.post('/', PersonaController.create);
 
-PersonaRouter.put('/', PersonaController.update);
+PersonaRouter.patch('/:id', PersonaController.update);
 
 PersonaRouter.delete('/:idpersona', PersonaController.delete);

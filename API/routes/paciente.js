@@ -7,6 +7,6 @@ PacienteRouter.get('/', PacienteController.getAll);
 
 PacienteRouter.post('/', PacienteController.create);
 
-PacienteRouter.put('/', PacienteController.update);
+PacienteRouter.patch('/:id', PacienteController.update);
 
 PacienteRouter.delete('/:idpaciente', PacienteController.delete);

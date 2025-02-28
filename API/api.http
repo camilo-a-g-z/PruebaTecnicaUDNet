@@ -1,5 +1,95 @@
-#GET http://localhost:3000/cita/
+PATCH http://localhost:3000/doctor/1
+Content-Type: application/json
 
+{
+    "idpersona": 1,
+    "especialidad": "Medicina General"
+}
+
+PATCH http://localhost:3000/paciente/1
+Content-Type: application/json
+
+{
+    "idpersona": 1,
+    "patologia": "Gripe"
+}
+
+PATCH http://localhost:3000/persona/1
+Content-Type: application/json
+
+{
+    "nombrepersona": "Juan",
+    "apellidopersona": "Perez",
+    "numdocumento": 123456789
+}
+
+PATCH http://localhost:3000/cita/1
+Content-Type: application/json
+
+{
+    "iddoctor": 1,
+    "idpaciente": 1,
+    "idconsultorio": 2,
+    "dia": 1,
+    "mes": 1,
+    "anio": 2021
+}
+
+
+PATCH  http://localhost:3000/consultorio/1
+Content-Type: application/json
+
+{
+    "nombreconsultorio": "Consultorio 1",
+    "piso": 3
+}
+
+GET http://localhost:3000/persona/
+
+GET http://localhost:3000/paciente/
+
+GET http://localhost:3000/doctor/
+
+GET http://localhost:3000/consultorio/
+
+GET http://localhost:3000/cita/
+
+POST http://localhost:3000/paciente
+Content-Type: application/json
+
+{
+    "idpaciente": 15,
+    "idpersona": 1,
+    "patologia": "Gripe"
+}
+
+POST http://localhost:3000/doctor
+Content-Type: application/json
+
+{
+    "iddoctor": 15,
+    "idpersona": 1,
+    "especialidad": "Medicina General"
+}
+
+POST http://localhost:3000/consultorio
+Content-Type: application/json
+
+{
+    "idconsultorio": 19,
+    "nombreconsultorio": "Consultorio 1",
+    "piso": 1
+}
+
+POST http://localhost:3000/persona
+Content-Type: application/json
+
+{
+    "idpersona": 25,
+    "nombrepersona": "Juan",
+    "apellidopersona": "Perez",
+    "numdocumento": 123456789
+}
 
 POST http://localhost:3000/cita
 Content-Type: application/json
@@ -11,5 +101,6 @@ Content-Type: application/json
     "idconsultorio": 1,
     "dia": 1,
     "mes": 1,
-    "anio": 1
+    "anio": 1,
+    "hora": "10:00"
 }

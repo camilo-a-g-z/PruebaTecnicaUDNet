@@ -1,5 +1,5 @@
 import { CitaModel } from "../models/postgres/cita.js";
-import { validateCita } from "../schema/cita.js";
+import { validateCita, validateCitaUpdate } from "../schema/cita.js";
 
 export class CitaController{
     static async getAll(req, res) {
@@ -28,8 +28,11 @@ export class CitaController{
 
     static async update(req, res) {
         try {
-            const cita = validateCita(req.body);
-            const result = await CitaModel.update(cita.data);
+            const cita = validateCitaUpdate(req.body);
+            if (cita.error) {
+                return res.status(400).json(cita.error);
+            }
+            const result = await CitaModel.update(req.params.id, cita);
             res.status(200).json(result);
         } catch (error) {
             console.error('Error en la actualización de cita', error);
@@ -45,6 +48,17 @@ export class CitaController{
         } catch (error) {
             console.error('Error en la eliminación de cita', error);
             res.status(500).json({ message: 'Error en la eliminación de cita' });
+        }
+    }
+
+    static async getCitasPorPaciente(req, res) {
+        try {
+            const idpaciente = req.params.idpaciente;
+            const result = await CitaModel.findByPaciente(idpaciente);
+            res.status(200).json(result);
+        } catch (error) {
+            console.error('Error en la consulta de cita por paciente', error);
+            res.status(500).json({ message: 'Error en la consulta de cita por paciente' });
         }
     }
 }

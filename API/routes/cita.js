@@ -7,6 +7,6 @@ CitaRouter.get('/', CitaController.getAll);
 
 CitaRouter.post('/', CitaController.create);
 
-CitaRouter.put('/', CitaController.update);
+CitaRouter.patch('/:id', CitaController.update);
 
 CitaRouter.delete('/:idcita', CitaController.delete);

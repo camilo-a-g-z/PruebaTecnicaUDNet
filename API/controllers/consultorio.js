@@ -1,5 +1,5 @@
 import { ConsultorioModel } from "../models/postgres/consultorio.js";
-import { validateConsultorio } from "../schema/consultorio.js";
+import { validateConsultorio, validateConsultorioUpdate } from "../schema/consultorio.js";
 
 export class ConsultorioController {
   static async getAll(req, res) {
@@ -28,8 +28,12 @@ export class ConsultorioController {
 
   static async update(req, res) {
     try {
-      const consultorio = validateConsultorio(req.body);
-      const result = await ConsultorioModel.update(consultorio.data);
+      console.log(req.body);
+      const consultorio = validateConsultorioUpdate(req.body);
+      if (consultorio.error) {
+        return res.status(400).json(consultorio.error);
+      }
+      const result = await ConsultorioModel.update(req.params.id, consultorio);
       res.status(200).json(result);
     } catch (error) {
       console.error("Error en la actualización de consultorio", error);
@@ -49,6 +53,19 @@ export class ConsultorioController {
       res
         .status(500)
         .json({ message: "Error en la eliminación de consultorio" });
+    }
+  }
+
+  static async getConsultorioPorId(req, res) {
+    try {
+      const idconsultorio = req.params.idconsultorio;
+      const result = await ConsultorioModel.findById(idconsultorio);
+      res.status(200).json(result);
+    } catch (error) {
+      console.error("Error en la consulta de consultorio por id", error);
+      res
+        .status(500)
+        .json({ message: "Error en la consulta de consultorio por id" });
     }
   }
 }
