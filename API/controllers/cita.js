@@ -15,6 +15,9 @@ export class CitaController{
     static async create(req, res) {
         try {
             const cita = validateCita(req.body);
+            if (cita.error) {
+                return res.status(400).json(cita.error);
+            }
             const result = await CitaModel.create(cita);
             res.status(201).json(result);
         } catch (error) {
@@ -26,7 +29,7 @@ export class CitaController{
     static async update(req, res) {
         try {
             const cita = validateCita(req.body);
-            const result = await CitaModel.update(cita);
+            const result = await CitaModel.update(cita.data);
             res.status(200).json(result);
         } catch (error) {
             console.error('Error en la actualización de cita', error);

@@ -22,7 +22,7 @@ export class CitaModel {
 
     static async create(cita) {
         try {
-            const result = await query('INSERT INTO public.cita (iddoctor, idpaciente, idconsultorio, dia, mes, anio) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [cita.iddoctor, cita.idpaciente, cita.idconsultorio, cita.dia, cita.mes, cita.anio]);
+            const result = await query('INSERT INTO public.cita (idcita, iddoctor, idpaciente, idconsultorio, dia, mes, anio) VALUES ($1, $2, $3, $4, $5, $6, $7)', [cita.idcita, cita.iddoctor, cita.idpaciente, cita.idconsultorio, cita.dia, cita.mes, cita.anio]);
             return result;
         } catch (error) {
             console.error('Error en la creación de cita', error);

@@ -1,1 +1,15 @@
-GET http://localhost:3000/cita/
+#GET http://localhost:3000/cita/
+
+
+POST http://localhost:3000/cita
+Content-Type: application/json
+
+{
+    "idcita": 15,
+    "iddoctor": 1,
+    "idpaciente": 1,
+    "idconsultorio": 1,
+    "dia": 1,
+    "mes": 1,
+    "anio": 1
+}

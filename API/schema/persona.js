@@ -11,10 +11,10 @@ create table PERSONA (
 */
 
 const Persona = z.object({
-  IDPERSONA: z.number(),
-  NOMBREPERSONA: z.string(),
-  APELLIDOPERSONA: z.string(),
-  NUMDOCUMENTO: z.number(),
+  idpersona: z.number(),
+  nombrepersona: z.string(),
+  apellidopersona: z.string(),
+  numdocumento: z.number()
 });
 
 export function validatePersona(object) {

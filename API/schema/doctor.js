@@ -10,9 +10,9 @@ create table DOCTOR (
 */
 
 const Doctor = z.object({
-  IDDOCTOR: z.number(),
-  IDPERSONA: z.number(),
-  ESPECIALIDAD: z.string().nullable(),
+  iddoctor: z.number(),
+  idpersona: z.number(),
+  especialidad: z.string().nullable()
 });
 
 export function validateDoctor(object) {

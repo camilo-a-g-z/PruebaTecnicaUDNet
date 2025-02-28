@@ -14,13 +14,13 @@ create table CITA (
 */
 
 const Cita = z.object({
-  IDCITA: z.number(),
-  IDDOCTOR: z.number(),
-  IDPACIENTE: z.number(),
-  IDCONSULTORIO: z.number(),
-  DIA: z.number(),
-  MES: z.number(),
-  ANIO: z.number(),
+  idcita: z.number(),
+  iddoctor: z.number(),
+  idpaciente: z.number(),
+  idconsultorio: z.number(),
+  dia: z.number(),
+  mes: z.number(),
+  anio: z.number(),
 });
 
 export function validateCita(object) {

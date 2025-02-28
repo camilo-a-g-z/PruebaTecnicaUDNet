@@ -10,9 +10,9 @@ create table CONSULTORIO (
 */
 
 const Consultorio = z.object({
-  IDCONSULTORIO: z.number(),
-  NOMBRECONSULTORIO: z.string(),
-  PISO: z.number(),
+  idconsultorio: z.number(),
+  nombreconsultorio: z.string(),
+  piso: z.number()
 });
 
 export function validateConsultorio(object) {
